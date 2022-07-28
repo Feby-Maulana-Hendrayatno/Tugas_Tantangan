@@ -1,0 +1,140 @@
+<?php
+use App\Models\Profil;
+$data = Profil::select("nama", "singkatan")->first();
+?>
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="<?php echo e(url('/app/admin/')); ?>">
+                <?php if(empty($data->nama)): ?>
+                Anonymus
+                <?php else: ?>
+                <?php echo e($data->nama); ?>
+
+                <?php endif; ?>
+            </a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="<?php echo e(url('/app/admin')); ?>">
+                <?php if(empty($data->singkatan)): ?>
+                HIN
+                <?php else: ?>
+                <?php echo e($data->singkatan); ?>
+
+                <?php endif; ?>
+            </a>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-header">Home</li>
+            <li class="dropdown <?php echo e(Request::segment(3) == "home" ? "active" : ""); ?>">
+                <a href="<?php echo e(url('/app/sistem/home')); ?>" class="nav-link">
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="menu-header">Menu</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                </ul>
+            </li>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check("admin")): ?>
+            <li class="<?php echo e(Request::segment(3) == "santri" ? "active" : ""); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/santri')); ?>">
+                    <i class="fa fa-user"></i>
+                    <span>Siswa</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3) == "asatidz" ? "active" : ""); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/asatidz')); ?>">
+                    <i class="fa fa-user"></i>
+                    <span>Asatidz</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3)=='absensi' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/absensi')); ?>">
+                    <i class="fa fa-book"></i>
+                    <span>Absensi</span>
+                </a>
+            </li>   
+            <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check("super_admin")): ?>
+            <li class="<?php echo e(Request::segment(3)=="admin_cabang" ? "active" : ""); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/admin_cabang')); ?>">
+                    <i class="fa fa-users"></i>
+                    <span>Admin Cabang</span>
+                </a>
+            </li>
+            <?php endif; ?>
+            <li class="menu-header"> Web </li>
+            <li class="<?php echo e(Request::segment(3) == "profil" ? "active" : ""); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/profil')); ?>">
+                    <i class="fa fa-search"></i>
+                    <span>Profil</span>
+                </a>
+            </li>
+            <li class="menu-header">Settings</li>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check("super_admin")): ?>
+            <li class="<?php echo e(Request::segment(3) == "status_absen" ? "active" : ""); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/status_absen')); ?>">
+                    <i class="fa fa-book"></i>
+                    <span>Status Absen</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3) == 'cabang' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/cabang')); ?>">
+                    <i class="fa fa-search"></i>
+                    <span>Cabang</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3) == 'jenjang' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/jenjang')); ?>">
+                    <i class="fa fa-search"></i>
+                    <span>Jenjang</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3)=='role' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/role')); ?>">
+                    <i class="far fa-user"></i>
+                    <span>Role</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3)=='users' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/users/')); ?>">
+                    <i class="far fa-user"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <?php endif; ?>
+            <li class="<?php echo e(Request::segment(3)=='pesan' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/pesan')); ?>">
+                    <i class="fa fa-book"></i>
+                    <span>Pesan</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3)=='profil_user' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/profil_user')); ?>">
+                    <i class="far fa-user"></i>
+                    <span>Profil User</span>
+                </a>
+            </li>
+            <li class="<?php echo e(Request::segment(3)=='informasi_login' ? 'active' : ''); ?>">
+                <a class="nav-link" href="<?php echo e(url('/app/sistem/informasi_login')); ?>">
+                    <i class="fa fa-key"></i>
+                    <span>Informasi Login</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i> Documentation
+            </a>
+        </div>
+    </aside>
+</div>
+<?php /**PATH E:\FILE KULIAH\SEMESTER 4\TUGAS KULIAH TAHUN AJARAN 2021 - 2022\PROYEK 3\RTQ-WEB\RumahTahfidz\resources\views/app/layouts/partials/sidebar/main-sidebar.blade.php ENDPATH**/ ?>

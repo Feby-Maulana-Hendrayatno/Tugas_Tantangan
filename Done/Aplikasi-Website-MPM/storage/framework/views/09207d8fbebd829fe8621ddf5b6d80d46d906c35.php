@@ -1,0 +1,1 @@
+data_profil<?php /**PATH C:\Users\ASUS\Desktop\Proyek-Terbaru-MPM\Contoh\resources\views//page/admin/profil/data_profil.blade.php ENDPATH**/ ?>
